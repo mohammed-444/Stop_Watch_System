@@ -35,14 +35,14 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := interface1
+BUILD_ARTIFACT_NAME := Stop_Watch_System
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-interface1.lss \
+Stop_Watch_System.lss \
 
 SIZEDUMMY += \
 sizedummy \
@@ -52,31 +52,31 @@ sizedummy \
 all: main-build
 
 # Main-build Target
-main-build: interface1.elf secondary-outputs
+main-build: Stop_Watch_System.elf secondary-outputs
 
 # Tool invocations
-interface1.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
+Stop_Watch_System.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,interface1.map -mmcu=atmega16 -o "interface1.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	avr-gcc -Wl,-Map,Stop_Watch_System.map -mmcu=atmega16 -o "Stop_Watch_System.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-interface1.lss: interface1.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
+Stop_Watch_System.lss: Stop_Watch_System.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S interface1.elf  >"interface1.lss"
+	-avr-objdump -h -S Stop_Watch_System.elf  >"Stop_Watch_System.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: interface1.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
+sizedummy: Stop_Watch_System.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega16 interface1.elf
+	-avr-size --format=avr --mcu=atmega16 Stop_Watch_System.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) interface1.elf
+	-$(RM) $(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) Stop_Watch_System.elf
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(SIZEDUMMY)
